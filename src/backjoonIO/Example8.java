@@ -1,15 +1,12 @@
 package backjoonIO;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Example8 {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-		List<String> strList = new ArrayList<String>();
 		String inpStr ;
 		int max=100;
 		boolean condition=true;
@@ -17,8 +14,7 @@ public class Example8 {
 		while(scan.hasNext()&&max>0) {
 			inpStr=scan.nextLine();
 			
-			if(inpStr.charAt(0)==32||inpStr.charAt(inpStr.length()-1)!=32) {
-				strList.add(inpStr);
+			if(inpStr.charAt(0)==32||inpStr.charAt(inpStr.length()-1)==32) {
 				break;
 			}//if end
 			
@@ -34,15 +30,11 @@ public class Example8 {
 			
 
 			if(condition==true) {
-				strList.add(inpStr);
+				System.out.println(inpStr);
 			}else {
 				break;
 			}
 			max--;
 		}//while end
-		
-		for(String str : strList) {
-			System.out.println(str);
-		}//for end
 	}//main() end
 }
