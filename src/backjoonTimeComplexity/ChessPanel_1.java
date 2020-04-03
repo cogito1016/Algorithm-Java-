@@ -13,9 +13,6 @@ public class ChessPanel_1 {
 
 		String[][] chessPanel = new String[height][width];
 		
-		//자르기가능한 8X8의 정사각형의 수
-		int possibleRectNum = 1+(height-8)*(width-8)+width-8+height-8;
-
 		int min=64;
 		
 		//체스판 입력부
