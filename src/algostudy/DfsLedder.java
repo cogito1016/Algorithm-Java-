@@ -3,9 +3,7 @@ package algostudy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Map;
 import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class DfsLedder {
 	
@@ -31,8 +29,6 @@ public class DfsLedder {
 	}//Node end
 	
 	public static void main(String[] args) throws IOException {
-
-		
 
 		BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
 		
@@ -73,8 +69,6 @@ public class DfsLedder {
 				}//for end
 			}//for end
 			
-	
-			
 			while(!stack.isEmpty()) {
 				
 				Node node = stack.pop();
@@ -108,7 +102,6 @@ public class DfsLedder {
 					stack.push(new Node(thisX,thisY));
 				}//for end
 			}//while end
-			
 		}//for end
 
 		br.close();
@@ -117,7 +110,7 @@ public class DfsLedder {
 		for(int i=0;i<10;i++)
 		{
 			System.out.println("#"+result[i][0]+" "+result[i][1]);
-		}
+		}//for end
 		
 	}//main() end
 }//class end
