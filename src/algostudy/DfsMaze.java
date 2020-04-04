@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BfsMaze {
+public class DfsMaze {
 	
 	static class Node{
 		int x,y;
