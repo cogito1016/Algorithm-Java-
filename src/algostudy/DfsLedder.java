@@ -23,7 +23,7 @@ public class DfsLedder {
 			return y;
 		}
 		public void setY(int y) {
-			this.y = y;
+			this.y = y; 
 		}
 		
 	}//Node end
