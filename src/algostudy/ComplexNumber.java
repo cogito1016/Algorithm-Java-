@@ -3,7 +3,8 @@ package algostudy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ComplexNumber {
 
@@ -50,7 +51,7 @@ public class ComplexNumber {
 		int thisX,thisY,complexNum=1;
 
 		
-		Stack<Node> stack = new Stack<Node>();
+		Queue<Node> queue = new LinkedList<Node>();
 		
 		for(int i=0;i<inputNum;i++) {
 			String s = br.readLine();
@@ -59,12 +60,12 @@ public class ComplexNumber {
 			}//for end
 		}//for end
 		
-		stack.push(new Node(0,0));
+		queue.add(new Node(0,0));
 		visit[0][0]=true;
 		
-		while(!stack.isEmpty()) {
+		while(!queue.isEmpty()) {
 			
-			Node node = stack.pop();
+			Node node = queue.poll();
 			
 			for(int i=0;i<4;i++) {
 				thisX=node.getX()+direct[i][1];
@@ -72,41 +73,16 @@ public class ComplexNumber {
 				
 				if(thisX>=inputNum||thisX<0||thisY>=inputNum||thisY<0)
 					continue;
-				if(map[thisY][thisX]==0)
-					continue;
+
 				if(visit[thisY][thisX]==true)
 					continue;
 				
-				// 만약 1 찾으면 여길 기점으로 BFS를 또 진행!
 				if(map[thisY][thisX]==1) {
-					Stack<Node> complexStack = new Stack<Node>();
-					complexStack.push(new Node(thisY,thisX));
-					
-					while(!complexStack.isEmpty()) {
-						Node complexNode = complexStack.pop();
-						
-						for(int j=0;j<4;j++) {
-							int complexX=complexNode.getX()+direct[j][1];
-							int complexY=complexNode.getY()+direct[j][0];
-							
-							if(complexX>=inputNum||complexX<0||complexY>=inputNum||complexY<0)
-								continue;
-							if(map[complexY][complexX]==0)
-								continue;
-							if(visit[complexY][complexX]==true)
-								continue;
-							
-							visit[complexY][complexX]=true;
-							stack.push(new Node(complexY,complexX));
-							map[complexY][complexX]=complexNum;
-						}//for end
-					}//while end
-					complexNum++;
+					map[thisY][thisX]=2;
 				}
 				
-				//
 				visit[thisY][thisX]=true;
-				stack.push(new Node(thisY,thisX));
+				queue.add(new Node(thisY,thisX));
 				
 				
 			}//for end
