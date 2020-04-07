@@ -44,7 +44,6 @@ public class TreasureIsland {
 		
 		Stack<Node> stack = new Stack<Node>();
 		Queue<Node> queue = new LinkedList<Node>();
-		List<Integer> list = new ArrayList<Integer>();
 		
 		int[][] direct = new int[][] {{0,1},{1,0},{0,-1},{-1,0}};
 		char[][] map = new char[y][x];
@@ -61,8 +60,6 @@ public class TreasureIsland {
 		
 		int range,thisX,thisY,max=0;
 		Node node,originNode;
-		int addNum=0; 
-		int popNum=-1;
 		
 		while(!stack.isEmpty()) {
 			visit = new boolean[y][x];
@@ -72,31 +69,37 @@ public class TreasureIsland {
 			
 			range=0;
 			
-			while(!queue.isEmpty()) {
-				node = queue.poll();
-				
-				for(int i=0;i<4;i++) {
-					thisX=node.getX()+direct[i][1];
-					thisY=node.getY()+direct[i][0];
-					if(thisY>=y||thisY<0||thisX>=x||thisX<0) 
-						continue;
-					if(visit[thisY][thisX])
-						continue;
-					if(map[thisY][thisX]=='W') 
-						continue;
-
-					visit[thisY][thisX]=true;
-					queue.add(new Node(thisY,thisX));
-				}//for end
-				
-			}//while end
 			
+			while(!queue.isEmpty()) {
+				
+				int queueSize = queue.size();
+				
+				for(int q=0;q<queueSize;q++) {				
+					node = queue.poll();
+					
+					for(int i=0;i<4;i++) {
+						thisX=node.getX()+direct[i][1];
+						thisY=node.getY()+direct[i][0];
+						if(thisY>=y||thisY<0||thisX>=x||thisX<0) 
+							continue;
+						if(visit[thisY][thisX])
+							continue;
+						if(map[thisY][thisX]=='W') 
+							continue;
+	
+						visit[thisY][thisX]=true;
+						queue.add(new Node(thisY,thisX));
+					}//for end
+				}//for end
+				range++;
+			}//while end
+
 			if(range>max)
 				max=range;
 		}//while end
 		
 		
-		System.out.println(max);
+		System.out.println(max-1);
 		
 		br.close();
 	}//main() end
