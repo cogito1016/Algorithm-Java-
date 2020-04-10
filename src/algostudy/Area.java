@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Area {
@@ -73,12 +72,6 @@ public class Area {
 			}//for end
 		}//for end
 		
-//		for(int j=0;j<y;j++) {
-//			for(int k=0;k<x;k++) {
-//				System.out.print(map[j][k]);
-//			}//for end
-//			System.out.println();
-//		}//for end
 		
 		Node node;
 		int result=0,thisX,thisY,areaNum=0;
@@ -87,8 +80,9 @@ public class Area {
 		for(int i=0;i<y;i++) {
 			for(int j=0;j<x;j++) {
 				if(!map[i][j]) {
-					result =0;
+					result =1;
 					areaNum++;
+					map[i][j]=true;
 					queue.offer(new Node(i,j));
 					while(!queue.isEmpty()) {
 						node = queue.poll();
@@ -105,10 +99,8 @@ public class Area {
 							queue.offer(new Node(thisY,thisX));
 						}//for end
 					}//while end
-					if(result==0)
-						resultSet.add(1);
-					else
-						resultSet.add(result);
+					
+					resultSet.add(result);
 					
 				}//if end
 			}//for end
@@ -122,7 +114,7 @@ public class Area {
 				if(thisVal>nextVal) {
 					resultSet.set(j, nextVal);
 					resultSet.set(j+1, thisVal);
-				}
+				}//if end
 			}//for end
 		}//for end
 		
