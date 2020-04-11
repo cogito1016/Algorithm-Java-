@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Area {
+public class Area_teacher {
 
 	static class Node{
 		
@@ -72,58 +73,42 @@ public class Area {
 			}//for end
 		}//for end
 		
-		
-		Node node;
-		int result=0,thisX,thisY,areaNum=0;
-		
 
 		for(int i=0;i<y;i++) {
 			for(int j=0;j<x;j++) {
 				if(!map[i][j]) {
-					result =1;
-					areaNum++;
+					int result = 1;
 					map[i][j]=true;
-					queue.offer(new Node(i,j));
+					queue.offer(new Node(i, j));
+					
 					while(!queue.isEmpty()) {
-						node = queue.poll();
-						
+						Node tempNode = queue.poll();
 						for(int k=0;k<4;k++) {
-							thisX= node.getX()+direct[k][0];
-							thisY= node.getY()+direct[k][1];
-							if(thisX>=x||thisX<0||thisY>=y||thisY<0)
+							int tempX = tempNode.getX()+direct[k][1];
+							int tempY = tempNode.getY()+direct[k][0];
+							
+							if(tempY>=y||tempY<0||tempX>=x||tempX<0)
 								continue;
-							if(map[thisY][thisX])
+							if(map[tempY][tempX])
 								continue;
+							
+							map[tempY][tempX]=true;
 							result++;
-							map[thisY][thisX]=true;
-							queue.offer(new Node(thisY,thisX));
+							queue.offer(new Node(tempY,tempX));
 						}//for end
 					}//while end
 					
 					resultSet.add(result);
-					
-				}//if end
+				}
 			}//for end
 		}//for end
 		
-		int thisVal,nextVal;
-		for(int i=0;i<resultSet.size();i++) {
-			for(int j=i;j<resultSet.size()-1;j++) {
-				thisVal=resultSet.get(j);
-				nextVal =resultSet.get(j+1);
-				if(thisVal>nextVal) {
-					resultSet.set(j, nextVal);
-					resultSet.set(j+1, thisVal);
-				}//if end
-			}//for end
-		}//for end
+		Collections.sort(resultSet);
 		
-		System.out.println(areaNum);
-		for(int i=0;i<resultSet.size();i++) {
-			System.out.print(resultSet.get(i));
-			if(i!=resultSet.size()-1)
-				System.out.print(" ");
-		}//for end
+		System.out.println(resultSet.size());
+		for (int item : resultSet) {
+			System.out.print(item + " ");
+		}
 		
 		br.close();
 	}//main() end

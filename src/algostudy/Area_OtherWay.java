@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -81,7 +82,7 @@ public class Area_OtherWay {
 			}//for end
 		}//for end
 		
-		int result=0,areaNum=0;
+		int result=0;
 		
 		
 		while(!queue.isEmpty()) {
@@ -93,7 +94,6 @@ public class Area_OtherWay {
 			
 			queueTemp.offer(node);
 			map[thisY][thisX]=true;
-			areaNum++;
 			result=1;
 			
 			while(!queueTemp.isEmpty()) {
@@ -116,26 +116,12 @@ public class Area_OtherWay {
 			resultSet.add(result);
 		}//while end
 		
+		Collections.sort(resultSet);
 		
-		int thisVal,nextVal;
-		for(int i=0;i<resultSet.size();i++) {
-			for(int j=i;j<resultSet.size()-1;j++) {
-				thisVal=resultSet.get(j);
-				nextVal =resultSet.get(j+1);
-				if(thisVal>nextVal) {
-					resultSet.set(j, nextVal);
-					resultSet.set(j+1, thisVal);
-				}//if end
-			}//for end
-		}//for end
-		
-		System.out.println(areaNum);
-		
-		for(int i=0;i<resultSet.size();i++) {
-			System.out.print(resultSet.get(i));
-			if(i!=resultSet.size()-1)
-				System.out.print(" ");
-		}//for end
+		System.out.println(resultSet.size());
+		for (int item : resultSet) {
+			System.out.print(item + " ");
+		}
 		
 		br.close();
 	}//main() end
