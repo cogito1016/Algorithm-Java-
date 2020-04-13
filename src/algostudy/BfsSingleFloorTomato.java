@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Tomato {
+public class BfsSingleFloorTomato {
 
 	static class Node{
 		
