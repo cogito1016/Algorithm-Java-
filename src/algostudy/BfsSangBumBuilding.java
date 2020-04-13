@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class SangBumBuilding {
+public class BfsSangBumBuilding {
 	
 	static class Node{
 		
