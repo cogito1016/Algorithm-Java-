@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Area_teacher {
+public class BfsArea_teacher {
 
 	static class Node{
 		

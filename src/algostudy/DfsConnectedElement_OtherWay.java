@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
 
-public class ConnectedElement_OtherWay {
+public class DfsConnectedElement_OtherWay {
 
 	static class Node{
 		

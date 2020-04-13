@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class OrganicCabbage {
+public class DfsOrganicCabbage {
 	
 	static class Node{
 		

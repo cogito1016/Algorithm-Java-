@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-public class ComplexNumber_OtherWay {
+public class BfsComplexNumber_OtherWay {
 
 	static class Node{
 		private int x,y;

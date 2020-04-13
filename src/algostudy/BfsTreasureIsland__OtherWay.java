@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class TreasureIsland__OtherWay {
+public class BfsTreasureIsland__OtherWay {
 
 	static class Node{
 		
