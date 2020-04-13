@@ -1,4 +1,4 @@
-package algostudy;
+package backjoonImplementation;
 
 import java.io.BufferedReader;
 import java.io.IOException;

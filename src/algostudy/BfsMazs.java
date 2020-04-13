@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class MazsBfs {
+public class BfsMazs {
 	static class Node{
 		private int x,y; 
 		Node(int y, int x){
