@@ -23,30 +23,38 @@ public class BfsRedGreenWeekenss {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int size = Integer.parseInt(br.readLine());
-		
+
 		char[][] map = new char[size][size];
+		char[][] weekMap = new char[size][size];
+		
 		boolean[][] visit = new boolean[size][size];
+		boolean[][] weekVisit = new boolean[size][size];
+		
 		int[][] direct = {{0,1},{1,0},{0,-1},{-1,0}};
 		Queue<Node> queue = new LinkedList<Node>();
-		List<Character> resultList = new ArrayList<Character>();
 		
 		for(int i=0;i<size;i++) {
 			String s = br.readLine();
 			for(int j=0;j<size;j++) {
 				map[i][j]=s.charAt(j);
+				if(map[i][j]=='R'||map[i][j]=='G')
+					weekMap[i][j]='W';
+				else
+					weekMap[i][j]='B';
 			}//for end
 		}//for end
+		
+		int normal=0;
 		
 		for(int i=0;i<size;i++) {
 			for(int j=0;j<size;j++) {
 				if(visit[i][j])
 					continue;
-				
 				queue.offer(new Node(i,j));
-				char thisColor = 0;
+				normal++;
 				while(!queue.isEmpty()) {
 					Node node = queue.poll();
-					thisColor=map[node.y][node.x];
+					char thisColor=map[node.y][node.x];
 					
 					for(int a=0;a<4;a++) {
 						int thisX = node.x+direct[a][1];
@@ -64,26 +72,41 @@ public class BfsRedGreenWeekenss {
 						
 					}//for end
 				}//while end
-				resultList.add(thisColor);
 			}//for end
 		}//for end
 		
-		int listSize = resultList.size();
-		int weekMan=listSize;
-		int normalMan=listSize;
-		char beforeColor=0;
-		for(int i=0;i<listSize;i++) {
-			char thisColor = resultList.get(i);
-			
-			if(thisColor=='R'&& (beforeColor=='G'||beforeColor=='R'))
-				weekMan--;
-			else if(thisColor=='G'&& (beforeColor=='G'||beforeColor=='R'))
-				weekMan--;
-			
-			beforeColor=thisColor;	
+		int week=0;
+		for(int i=0;i<size;i++) {
+			for(int j=0;j<size;j++) {
+				if(weekVisit[i][j])
+					continue;
+				queue.offer(new Node(i,j));
+				week++;
+				while(!queue.isEmpty()) {
+					Node node = queue.poll();
+					char thisColor=weekMap[node.y][node.x];
+					
+					for(int a=0;a<4;a++) {
+						int thisX = node.x+direct[a][1];
+						int thisY = node.y+direct[a][0];
+						
+						if(thisX>=size||thisX<0||thisY>=size||thisY<0)
+							continue;
+						if(weekVisit[thisY][thisX])
+							continue;
+						if(weekMap[thisY][thisX]!=weekMap[node.y][node.x])
+							continue;
+						
+						weekVisit[thisY][thisX]=true;
+						queue.offer(new Node(thisY,thisX));
+						
+					}//for end
+				}//while end
+			}//for end
 		}//for end
 		
-		System.out.println(normalMan+" "+weekMan);
+		
+		System.out.println(normal+" "+week);
 		
 		br.close();
 	}//main() end
