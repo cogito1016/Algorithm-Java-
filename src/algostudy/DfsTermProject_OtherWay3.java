@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class DfsTermProject_OtherWay2 {
+public class DfsTermProject_OtherWay3 {
 
 	public static void main(String[] args) throws IOException {
 		
