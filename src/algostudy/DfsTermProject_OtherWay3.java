@@ -32,39 +32,35 @@ public class DfsTermProject_OtherWay3 {
 					visit[a]=true;
 					nonTeam[i]++;
 				}//if end
-				
+				else {
+					stack.push(a);
+				}//if~else
 			}//for end
 
-			for(int b=0;b<v;b++) {
-				if(visit[b])
+			list = new ArrayList<Integer>();
+			while(!stack.isEmpty()) {
+				int node = stack.pop();
+				list.add(node);
+				visit[node]=true;
+				
+				int nextNode = map[node];
+				if(nextNode==list.get(0)) {
+					nonTeam[i]+=list.size();
+					list = new ArrayList<Integer>();
 					continue;
-				
-				list = new ArrayList<Integer>();
-				stack.push(b);
-				list.add(b);
-				visit[b]=true;
-				
-				while(!stack.isEmpty()) {
-					int node = stack.pop();
-					int nextNode = map[node];
-					if(nextNode==b) {
-						nonTeam[i]+=list.size();
-						continue;
-					}//if end
-					if(list.contains(nextNode)){
-						int thisIndex = list.indexOf(nextNode);
-						nonTeam[i]+= list.size()-thisIndex;
-						continue;
-					}//if end
-					if(visit[nextNode]) {
-						continue;
-					}
-					visit[nextNode]=true;
-					list.add(nextNode);
-					stack.push(nextNode);
-				}//while end
-			}//for end
-			
+				}//if end
+				if(list.contains(nextNode)){
+					int thisIndex = list.indexOf(nextNode);
+					nonTeam[i]+= list.size()-thisIndex;
+					list = new ArrayList<Integer>();
+					continue;
+				}//if end
+				if(visit[nextNode]) {
+					list = new ArrayList<Integer>();
+					continue;
+				}//if end
+				stack.push(nextNode);
+			}//while end
 			System.out.println(v-nonTeam[i]);
 		}//for end
 		br.close();
