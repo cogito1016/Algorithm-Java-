@@ -63,16 +63,14 @@ public class BfsChessHorse {
 							continue;
 						if(map[thisY][thisX])
 							continue;
-						if((thisX==endX)&&(thisY==endY))
-						{
+						if((thisX==endX)&&(thisY==endY)){
 							flag=true;
 							while(!queue.isEmpty())
 								queue.poll();
 							break;
-						}
+						}//if end
 						map[thisY][thisX]=true;
 						queue.offer(new Node(thisY,thisX));
-
 					}//for end
 				}//for end
 			}//while end
