@@ -20,35 +20,46 @@ public class FindNumber {
 			numList[i]=Integer.parseInt(st.nextToken());
 		}//for end
 		
+		int targetNumSize = Integer.parseInt(br.readLine());
+		int[] targetNumList = new int[targetNumSize];
+		st=new StringTokenizer(br.readLine());
+		for(int i=0;i<targetNumList.length;i++) {
+			targetNumList[i]=Integer.parseInt(st.nextToken());
+		}//for end
+		
+		
 		Arrays.sort(numList);
+		int left,right,mid,result;
 		
-		int left = 0;
-		int right = numSize-1;
-		int mid;
-		
-		int findNum = 4 ;
-		
-		int leftPin=-1,rightPin=-1;
-		if(numList[left]==findNum)
-			leftPin=left;
-		if(numList[right]==findNum)
-			rightPin=right;
-		
-		int result=0;
-		
-		while(leftPin!=-1&&rightPin!=-1) {
+		for(int targetNum : targetNumList) {
+			left =0;
+			right = numSize-1;
+			result =0;
 			
-			mid = (left+right)/2;
-			
-			if(numList[mid]>findNum)
-				right = mid-1;
-			if(numList[mid]<findNum)
-				left = mid+1;
+			while(left<=right) {
+				mid = (left+right)/2;
 				
-		}//while end
+				if(numList[mid]>targetNum) {
+					right=mid-1;
+				}else if(numList[mid]<targetNum) {
+					left=mid+1;
+				}else {
+					for(int i=mid;i<numSize;i++) {
+						if(numList[i]!=targetNum)
+							break;
+						result++;
+					}//for end
+
+					for(int i=mid-1;i>=0;i--) {
+						if(numList[i]!=targetNum)
+							break;
+						result++;
+					}//for end
+					break;
+				}//if~elseIf~else
+			}//while end
+			System.out.println(result);
+		}//for end
 		
-		System.out.println(result);
-		
-		br.close();
 	}//main() end
 }//class end
