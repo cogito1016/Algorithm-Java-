@@ -22,17 +22,9 @@ public class FindNumber {
 		
 		Arrays.sort(numList);
 		
-//		int compareNumSize = Integer.parseInt(br.readLine());
-//		int[] compareNumList = new int[compareNumSize];
-//		st=new StringTokenizer(br.readLine());
-//		for(int i=0;i<compareNumList.length;i++) {
-//			compareNumList[i]=Integer.parseInt(st.nextToken());
-//		}//for end
-		
 		int left = 0;
 		int right = numSize-1;
 		int mid;
-		
 		
 		int findNum = 4 ;
 		
@@ -43,6 +35,7 @@ public class FindNumber {
 			rightPin=right;
 		
 		int result=0;
+		
 		while(leftPin!=-1&&rightPin!=-1) {
 			
 			mid = (left+right)/2;
@@ -51,9 +44,8 @@ public class FindNumber {
 				right = mid-1;
 			if(numList[mid]<findNum)
 				left = mid+1;
-			
+				
 		}//while end
-		
 		
 		System.out.println(result);
 		
