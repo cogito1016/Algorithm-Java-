@@ -25,49 +25,49 @@ public class SliceTree_OtherWay {
 		
 		int right = size-1;
 		int left = 0;
-		int mid,tempNum;
-		long result;
-		int minHeight=0;
+		int mid;
+		int tempResult;
+		int thisHeight;
+		int maxHeight=0;
 		
 		while(left<=right) {
-			mid = (right+left)/2;
-			result =0;
-			tempNum = list[mid];
-			
+			mid = (left+right)/2;
+			thisHeight = list[mid];
+			tempResult =0;
 			for(int i=mid+1;i<size;i++) {
-				result += list[i]-tempNum;
+				tempResult+=list[i]-thisHeight;
 			}//for end
 			
-			minHeight=list[mid];
-			if(result<targetNum) {
-					
-				right=mid-1;
-				
-
-				if(left>=right) {
-					for(int i=0;i<list[mid];i++) {
-
-						result =0;
-						
-						for(int j=mid;j<size;j++) {
-							result+= list[j]-i;
-						}//for end
-						if(result<targetNum)
-							break;
-						minHeight=i;
-						if(result==targetNum)
-							break;
-					}//for end
-				}//if end
-				
-			}else if(result>targetNum) {
-				left=mid+1;
+			if(tempResult>targetNum) {
+				left = mid+1;
+			}else if(tempResult<targetNum) {
+				right = mid-1;
 			}else {
+				maxHeight=thisHeight;
 				break;
-			}//if~elseIf~else end
+			}//If~elseIf~If
+			
+			if(left>=right) {
+
+				
+				for(int i=list[mid-1];i<list[mid];i++) {
+					
+					tempResult =0;
+					for(int j=mid;j<size;j++) {
+						tempResult+=list[j]-i;	
+					}//for end
+					if(tempResult<targetNum)
+						break;
+					maxHeight = i;
+				}//for end
+				
+				
+				break;
+			}//if end
+			
 		}//while end
 		
-		System.out.println(minHeight);
+		System.out.println(maxHeight);
 		
 		br.close();
 	}//main() end
