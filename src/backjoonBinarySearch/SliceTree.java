@@ -25,49 +25,67 @@ public class SliceTree {
 		
 		int right = size-1;
 		int left = 0;
-		int mid,tempNum;
-		long result;
-		int minHeight=0;
-		
+		int mid;
+		int answer=0;
+		long sum;
+		boolean flag = false ;
 		while(left<=right) {
-			mid = (right+left)/2;
-			result =0;
-			tempNum = list[mid];
-			
-			for(int i=mid+1;i<size;i++) {
-				result += list[i]-tempNum;
+			mid = (left+right)/2;
+			sum=0;
+			for(int i=mid;i<size;i++) {
+				sum += list[i];
 			}//for end
-			
-			minHeight=list[mid];
-			if(result<targetNum) {
-					
-				right=mid-1;
-				
-
-				if(left>=right) {
-					for(int i=0;i<list[mid];i++) {
-
-						result =0;
-						
-						for(int j=mid;j<size;j++) {
-							result+= list[j]-i;
-						}//for end
-						if(result<targetNum)
-							break;
-						minHeight=i;
-						if(result==targetNum)
-							break;
-					}//for end
-				}//if end
-				
-			}else if(result>targetNum) {
-				left=mid+1;
-			}else {
+			int birTreeSize = size-mid;
+			long bigTreeTotal = list[mid]*birTreeSize;
+			long finalSum = sum - bigTreeTotal;
+			if(finalSum==targetNum) {
+				answer=list[mid];
 				break;
-			}//if~elseIf~else end
+			}//if end
+			
+			if(finalSum<targetNum) {
+				right=mid-1;
+				if(left>right) {
+					int temp = left;
+					right = list[left+1]-1;
+					left = list[temp-1]+1;
+					flag=true;
+				}
+			}//if end
+			
+			if(finalSum>targetNum) {
+				left=mid+1;
+				if(left>right) {
+					int temp = left;
+					left = list[left-1]+1;
+					right = list[temp+1]-1;
+					flag=true;
+				}
+			}//if end
+				
+			if(flag) {
+				
+				while(left<=right) {
+					mid = (left+right)/2;
+					finalSum=sum - mid*birTreeSize;
+					if(finalSum==targetNum){
+						answer=mid;
+						break;
+					}//if end
+					
+					if(finalSum>targetNum) {
+						answer=mid;
+						left= mid+1; 
+					}//if end
+					if(finalSum<targetNum)
+						right= mid-1;
+				}//while end
+				break;
+			}//if end
+			
 		}//while end
 		
-		System.out.println(minHeight);
+		System.out.println(answer);
 		
 		br.close();
 	}//main() end
