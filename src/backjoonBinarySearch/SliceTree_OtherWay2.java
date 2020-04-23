@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class SliceTree_OtherWay {
+public class SliceTree_OtherWay2 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -46,23 +46,29 @@ public class SliceTree_OtherWay {
 				right=mid-1;
 			
 			if(left>right) {
-				for(int i=list[right]+1;i<list[left];i++) {
+				int standard = left;
+				int temp = list[left]-1;
+				left=list[right]+1;
+				right=temp;
+				int beforeMin=0;
+				while(left<=right) {
+					mid = (left+right)/2;
 					sum =0;
-					
-					for(int j=left;j<size;j++) {
-						sum+= list[j]-i;
+					for(int i=standard;i<size;i++) {
+						sum+= list[i]-mid;
 					}//for end
-					
-					System.out.println(sum);
-					minHeight=i;
+					minHeight=mid;
 					if(sum==targetNum) {
 						break;
 					}//if end
-					if(sum<targetNum) {
-						minHeight=i-1;
+				
+					if(sum>targetNum) {
+						minHeight=beforeMin;
 						break;
 					}
-				}//for end
+					beforeMin=minHeight;
+				}//while end
+				break;
 			}//if end
 		}//while end
 		System.out.println(minHeight);
