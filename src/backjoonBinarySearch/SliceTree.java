@@ -23,70 +23,34 @@ public class SliceTree {
 		
 		Arrays.sort(list);
 		
-		int right = size-1;
-		int left = 0;
-		int mid;
-		int answer=0;
-		long sum;
-		boolean flag = false ;
+		long left =1;
+		long right = list[list.length-1];
+		long mid;
+		long answer=0;
+		
 		while(left<=right) {
 			mid = (left+right)/2;
-			sum=0;
-			for(int i=mid;i<size;i++) {
-				sum += list[i];
+			
+			long total=0;
+			for(int i=0;i<size;i++) {
+				long cuttingTree = list[i]-mid;
+				if(cuttingTree<0)
+					continue;
+				else
+					total+= cuttingTree;
 			}//for end
-			int birTreeSize = size-mid;
-			long bigTreeTotal = list[mid]*birTreeSize;
-			long finalSum = sum - bigTreeTotal;
-			if(finalSum==targetNum) {
-				answer=list[mid];
-				break;
-			}//if end
-			
-			if(finalSum<targetNum) {
+
+			if(total<targetNum)
 				right=mid-1;
-				if(left>right) {
-					int temp = left;
-					right = list[left+1]-1;
-					left = list[temp-1]+1;
-					flag=true;
-				}
-			}//if end
-			
-			if(finalSum>targetNum) {
+			if(total>=targetNum) {
+				answer=mid;
 				left=mid+1;
-				if(left>right) {
-					int temp = left;
-					left = list[left-1]+1;
-					right = list[temp+1]-1;
-					flag=true;
-				}
-			}//if end
-				
-			if(flag) {
-				
-				while(left<=right) {
-					mid = (left+right)/2;
-					finalSum=sum - mid*birTreeSize;
-					if(finalSum==targetNum){
-						answer=mid;
-						break;
-					}//if end
-					
-					if(finalSum>targetNum) {
-						answer=mid;
-						left= mid+1; 
-					}//if end
-					if(finalSum<targetNum)
-						right= mid-1;
-				}//while end
-				break;
-			}//if end
+			}
 			
 		}//while end
 		
-		System.out.println(answer);
 		
+		System.out.println(answer);
 		br.close();
 	}//main() end
 }//class end
