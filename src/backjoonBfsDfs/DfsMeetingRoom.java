@@ -20,6 +20,11 @@ public class DfsMeetingRoom {
 		public int compareTo(Request o) {
 			if(end<o.end)
 				return -1;
+			if(end==o.end)
+			{
+				if(start<o.start)
+					return -1;
+			}
 			return 0;
 		}
 	}//class end
@@ -31,9 +36,10 @@ public class DfsMeetingRoom {
 		int requestNum = Integer.parseInt(br.readLine());
 		Request[] requestList = new Request[requestNum];
 		
-		
 		Stack<Integer> stack = new Stack<Integer>();
+		
 		int max=0;
+		
 		for(int i=0; i<requestNum; i++) {
 			st=new StringTokenizer(br.readLine());
 			Request request = new Request(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
