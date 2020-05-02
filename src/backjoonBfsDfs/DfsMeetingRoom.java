@@ -18,14 +18,13 @@ public class DfsMeetingRoom {
 		
 		@Override
 		public int compareTo(Request o) {
-			if(end<o.end)
-				return -1;
-			if(end==o.end)
-			{
-				if(start<o.start)
-					return -1;
+			if(end>o.end)
+				return 1;
+			if(end==o.end){
+				if(start>o.start)
+					return 1;
 			}
-			return 0;
+			return -1;
 		}
 	}//class end
 
