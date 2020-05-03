@@ -12,8 +12,11 @@ public class Ps {
 		int test = Integer.parseInt(br.readLine());
 		
 		for(int i=0;i<test;i++) {
+			
 			String s = br.readLine();
+			
 			Stack<Character> stack = new Stack<Character>();
+			
 			for(int j=0;j<s.length();j++) {
 				char thisChar = s.charAt(j);
 				if(!stack.isEmpty()) {

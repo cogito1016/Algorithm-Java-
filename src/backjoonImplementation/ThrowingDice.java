@@ -6,6 +6,38 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class ThrowingDice {
+	
+	
+	class Dice{
+		int x,y;
+		int[][] map = new int[4][3];
+	
+		Dice(){
+			this.x=1;
+			this.y=2;
+		}//cons end
+		
+		public void turnNorth() {
+			if(x==1) {
+				y-=1;
+				if(y<0)
+					y=3;
+			}//if end
+			if(x==0||x==2) {
+				x=1;
+				y=0;
+			}
+		}
+		
+		public void turnSouth() {
+			if(x==1) {
+				y+=1;
+				if(y>3)
+					y=0;
+			}//if end
+		}
+		
+	}//dice class end
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
