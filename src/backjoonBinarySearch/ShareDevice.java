@@ -22,41 +22,8 @@ public class ShareDevice {
 		
 		Arrays.sort(house);
 		
-		int max=house[houseNum-1]-house[0];
-		int min=0;
-		int left=house[0];
-		int right = house[houseNum-1];
-		int mid;
-		int recentHouse;
-		int count;
-		
-		while(left<=right) {
-			mid = (left+right)/2;
-			min=max;
-			recentHouse=house[0];
-			count=1;
-			
-			for(int thisHouse : house) {
-				int gap = thisHouse - recentHouse;
-				if(gap>=mid) {
-					if(gap<min)
-						min=gap;
-					recentHouse=thisHouse;
-					count++;
-				}//if end
-			}//for end
-		
-			if(count<deviceNum) {
-				right=mid-1;
-			}else if(count>deviceNum) {
-				left=mid+1;
-			}else {
-				break;
-			}//if~elseIf~else end 
-		}//while end
 		
 		
-		System.out.println(min);
 		
 		br.close();
 	}//main() end
