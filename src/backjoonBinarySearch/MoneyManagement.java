@@ -20,51 +20,42 @@ public class MoneyManagement {
 		for(int i=0;i<days;i++) {
 			list[i]= Integer.parseInt(br.readLine());
 			total+=list[i];
+			if(list[i]>max)
+				max=list[i];
 		}//for end
 		
-//		Arrays.sort(list);
-
-		max=list[days-1];
-		
-		long left=max;
-		long right=total;
+		long left = max;
+		long right = total;
 		long mid;
-		long result=0;
-		if(days==chance) {
-			System.out.println(left);
-		}else if(chance==1) {
-			System.out.println(right);
-		}else {
-			while(left<=right) {
+		long result=total;
+		while(left<=right) {
+			mid = (left+right)/2;
 			
-				mid = (left+right)/2;
-				
-				int opp=1;
-				long temp=mid;
-				
-				
-				for(int i=0;i<days;i++) {
+			long temp = mid;
+			int count = 1;
+			for(int i=0;i<days;i++) {
+				temp -= list[i];
+				if(temp==0) {
+					temp=mid;
+					count++;
+				}
+				if(temp<0) {
+					temp = mid;
 					temp-=list[i];
-					if(temp==0) {
-						temp=mid;
-						opp++;
-					}//if end
-					else if(temp<0) {
-						temp=mid;
-						temp-=list[i];
-						opp++;
-					}//if end
-				}//for end
-				
-				if(opp<=chance) {
-					right=mid-1;
+					count++;
+				}//if end
+			}//for end
+			
+			if(count<=chance) {
+				right=mid-1;
+				if(result>mid)
 					result=mid;
-				}else
-					left=mid+1;		
-			}//while end
-			System.out.println(result);
-		}
+			}else if(count>chance)
+				left=mid+1;
+			//else~if end
+		}//while end
 		
+		System.out.println(result);
 		
 		br.close();
 	}
