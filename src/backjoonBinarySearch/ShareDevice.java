@@ -22,8 +22,42 @@ public class ShareDevice {
 		
 		Arrays.sort(house);
 		
+		int left=1;
+		int right=house[house.length-1]-house[0];
+		int mid;
+		int result=0;
 		
+		while(left<=right) {
+			int installedDevice=1;
+			
+			mid=(left+right)/2;
+			
+			int thisDevice=house[0];
+
+			int tempMin=1000000000;
+			
+			for(int i=1;i<houseNum;i++) {
+				int sub = house[i]-thisDevice;
+				if(sub>=mid) {
+					thisDevice=house[i];
+					installedDevice++;
+					if(sub<tempMin)
+						tempMin=sub;
+				}//if end
+			}//for end
+			
+			if(installedDevice<deviceNum) {
+				right = mid-1;
+			}else if(installedDevice>=deviceNum) {
+				left = mid+1;
+				
+				if(result<tempMin)
+					result=tempMin;
+			}//if~else if end
+			
+		}//while end
 		
+		System.out.println(result);
 		
 		br.close();
 	}//main() end
