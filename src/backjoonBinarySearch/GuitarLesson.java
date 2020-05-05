@@ -59,7 +59,6 @@ public class GuitarLesson {
 					right=mid-1;
 					if(min>mid)
 						min=mid;
-//					if(tempBluelay==bluelayNum)
 				}
 				else if(tempBluelay>bluelayNum)
 					left=mid+1;
