@@ -42,19 +42,19 @@ public class Combination {
 		for(int i=1;i<=n;i++) {
 			nFactorial = nFactorial.multiply(BigInteger.valueOf(i));
 		}//for end
-		System.out.println("n!="+nFactorial);
+//		System.out.println("n!="+nFactorial);
 		
 		BigInteger mFactorial = BigInteger.ONE;
 		for(int i=1;i<=m;i++) {
 			mFactorial = mFactorial.multiply(BigInteger.valueOf(i));
 		}//for end
-		System.out.println("m!="+mFactorial);
+//		System.out.println("m!="+mFactorial);
 		
 		BigInteger nSubmFactorial = BigInteger.ONE;
 		for(int i=1;i<=n-m;i++) {
 			nSubmFactorial = nSubmFactorial.multiply(BigInteger.valueOf(i));
 		}//for end
-		System.out.println("n-m!="+nSubmFactorial);
+//		System.out.println("n-m!="+nSubmFactorial);
 		
 		BigInteger bigResult = nFactorial.divide(mFactorial.multiply(nSubmFactorial));
 		System.out.println(bigResult);
