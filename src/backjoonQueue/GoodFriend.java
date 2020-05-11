@@ -19,7 +19,7 @@ public class GoodFriend {
 		int num = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken())+1;
 		
-		List<Integer> queue = new ArrayList<Integer>();
+		Queue<Integer> queue = new LinkedList<Integer>();
 		List<Integer> tempList = new ArrayList<Integer>() ;
 		long answer = 0;
 		int left;
@@ -27,11 +27,12 @@ public class GoodFriend {
 		int mid;
 		int thisRight;
 		int thisLeft;
+		int thisNum;
 		
 		for(int i=0;i<num;i++) {
 			String s = br.readLine();
 			if(queue.size()>=k) {
-				int removeNode = queue.remove(0);
+				int removeNode = queue.poll();
 				int removeLoc = tempList.indexOf(removeNode);
 				tempList.remove(removeLoc);
 			}//큐 초과시 제거
@@ -39,39 +40,64 @@ public class GoodFriend {
 			int node = s.length();
 			if(!queue.isEmpty()) {
 				if(queue.contains(node)) {
-					Collections.sort(tempList);
-					left = 0;
-					right = tempList.size()-1;
-					mid = 0;
-					thisRight=0;
-					while(left<=right) {
-						mid = (left+right)/2;
-						if(tempList.get(mid)>node) {
-							right = mid-1;
-						}else if(tempList.get(mid)<=node) {
-							left = mid+1;
-							thisRight = mid;
-						}
-					}//while end
+					int listSize= tempList.size();
+					if(tempList.get(listSize-1)==node)
+						thisRight = listSize-1;
+					else {
+						left = 0;
+						right = listSize-1;
+						mid = 0;
+						thisRight=0;
+						while(left<=right) {
+							mid = (left+right)/2;
+							thisNum = tempList.get(mid);
+							if(thisNum>node) {
+								right = mid-1;
+							}else if(thisNum<=node) {
+								left = mid+1;
+								thisRight = mid;
+							}//if~ elseIf end
+						}//while end
+					}//if~else end
 					
-					left = 0;
-					right = thisRight;
-					mid = 0;
-					thisLeft = 0;
-					while(left<=right) {
-						mid = (left+right)/2;
-						if(tempList.get(mid)<node)
-							left=mid+1;
-						else if(tempList.get(mid)>=node) {
-							right=mid-1;
-							thisLeft=mid;
-						}//if~ else if end
-					}//while end
+					if(tempList.get(0)==node)
+						thisLeft=0;
+					else {
+						left = 0;
+						right = thisRight;
+						mid = 0;
+						thisLeft = 0;
+						while(left<=right) {
+							mid = (left+right)/2;
+							thisNum = tempList.get(mid);
+							if(thisNum<node)
+								left=mid+1;
+							else if(thisNum>=node) {
+								right=mid-1;
+								thisLeft=mid;
+							}//if~ else if end
+						}//while end
+					}//if~else end
+					
 					answer+= (thisRight-thisLeft+1);
 				}//if end
 			}//if end 
-			queue.add(node);
-			tempList.add(node);
+			left=0;
+			right=tempList.size()-1;
+			int thisIndex=0;
+			while(left<=right) {
+				mid = (left+right)/2;
+				thisNum = tempList.get(mid);
+				if(thisNum<node) {
+					left=mid+1;
+				}
+				else if(thisNum>=node) {
+					right=mid-1;
+					thisIndex=mid;
+				}
+			}//while end
+			tempList.add(thisIndex,node);
+			queue.offer(node);
 		}//for end
 		
 		System.out.println(answer);
