@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class CombinationLotto {
+public class CombinationLotto_Repeat {
 	static int maximum=6;
 
 	public static void main(String[] args) throws IOException {
@@ -23,32 +23,28 @@ public class CombinationLotto {
 			int[] list = new int[listNum];
 			for(int j=0;j<listNum;j++) {
 				list[j]=Integer.parseInt(st.nextToken());
-			}//for end
+			}//for end 입력 초기화
 			
 			Stack<Integer> stack = new Stack<Integer>();
-			List<Integer> stackList = new ArrayList<Integer>();
-			
 			stack.add(-1);
-			stackList.add(-1);
-			int maxSize=1;
 			while(!stack.isEmpty()) {
-				int thisNumber = stack.pop();
-				stackList.remove(stackList.size()-1);
-				maxSize--;
+				int thisIndex = stack.pop();
 				
-				for(int i=thisNumber+1;i<listNum;i++) {
+				for(int i= thisIndex+1;i<list.length;i++) {
 					stack.add(i);
-					stackList.add(list[i]);
-					maxSize++;
-					if(maxSize==maximum) {
-						for(int j=0;j<stackList.size();j++) 
-							System.out.print(stackList.get(j)+" ");
+					if(stack.size()==maximum) {
+						for(int a=0;a<stack.size();a++) {
+							System.out.print(list[stack.get(a)]+" ");
+						}//출력
 						System.out.println();
 						break;
-					}//if end
-				}//for end
-			}//while end
+					}//로또개수만큼 선택된거면	
+				}//for end 스택에 추가부분
+			}//Dfs로 조합구현
+			
+			
 			System.out.println();
+			
 		}//while end
 		br.close();
 	}//main() end
