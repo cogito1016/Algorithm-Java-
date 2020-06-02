@@ -11,6 +11,12 @@ public class QuickSort {
 	}//quickSort() end
 	
 	public static int partition(int[] array, int left,int right) {
+		//최초 피벗값이 최소나 최대일경우 파티션이 안나눠질수도있으므로 
+		//피벗을 중간요소로 선태갛면 해결이 가능
+		//이 경우면 nLogn 시간복잡도 소트보다 빠르다고 알려져있음
+		int mid = (left+right)/2;
+		swap(array,left,mid);
+		
 		int pivot = array[left];
 		int i=left,j=right;
 		
