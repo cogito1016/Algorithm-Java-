@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class TurningSueshi {
 		}//for end 
 		
 		Set<Integer> eatList = new HashSet<Integer>();
-		
+		HashMap<K, V>
 		int max = 0;
 		eatList.add(coupon);
 		
