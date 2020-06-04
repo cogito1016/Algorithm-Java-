@@ -28,7 +28,7 @@ public class TurningSueshi {
 		}//for end 
 		
 		Set<Integer> eatList = new HashSet<Integer>();
-		HashMap<K, V>
+
 		int max = 0;
 		eatList.add(coupon);
 		
