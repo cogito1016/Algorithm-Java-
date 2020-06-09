@@ -4,21 +4,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class LittleShark {
+public class LittleShark_PriorityQueue{
 
-	static class Node{
+	static class Node implements Comparable<Node>{
 		int x,y;
 		
 		Node(int y,int x){
 			this.x=x;
 			this.y=y; 
 		}//cons end 
+		
+		@Override
+		public int compareTo(Node o) {
+			
+			if(this.y>o.y)
+				return 1;
+			if(this.y==o.y) {
+				if(this.x>o.x)
+					return 1;	
+				return -1;
+			}
+			
+			return -1;
+		}
+		
 	}//class end 
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
+		
 	
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
@@ -29,6 +46,8 @@ public class LittleShark {
 		boolean[][] visit = new boolean[N][N];
 		int[][] direct = {{-1,0},{0,-1},{0,1},{1,0}};
 		Queue<Node> queue = new LinkedList<Node>();
+		PriorityQueue<Node> priQue = new PriorityQueue<Node>();
+		
 		int[] status = new int[10];
 		int babyShark = 2;
 		int babyStomach = 0;
@@ -47,10 +66,9 @@ public class LittleShark {
 			}//for end 
 		}//for end
 		
-		
+		int answer = 0;
 		int result = 0;
 		int checkIndx = 1;
-		boolean ansFlag = false;
 		while(!queue.isEmpty()) {
 			
 			int queueSize = queue.size();
@@ -58,28 +76,18 @@ public class LittleShark {
 			boolean possible = false;
 			
 			for(int i=1;i<babyShark;i++) {
-				System.out.println("status"+i+"="+status[i]);
 				if(status[i]!=0)
 					possible=true;
 			}//for end 
 			if(!possible) {
-				System.out.println("엄마헬프");
-				ansFlag=true;
 				break;
 			}
 			
 			result++;
 			
-			
-			
 			for(int i=0;i<queueSize;i++) {
-				if(reFlag)
-					break;
 				Node node = queue.poll();
-				
 				for(int j=0;j<4;j++) {
-					if(reFlag)
-						break;
 					int thisX = node.x+direct[j][1];
 					int thisY = node.y+direct[j][0];
 					
@@ -99,20 +107,11 @@ public class LittleShark {
 							continue;
 						}//if end
 						if(map[thisY][thisX]<babyShark) {
-							System.out.println("===========================");
-							queue.clear();
-							visit = new boolean[N][N];
 							
-							babyStomach++;
-							status[map[thisY][thisX]]--;
-							map[thisY][thisX]=0;
-							check[thisY][thisX]=checkIndx++;
-							if(babyStomach==babyShark) {
-								babyShark++;
-								System.out.println("업그레이드를하여"+babyShark+"가 되었다");
-								babyStomach=0;
-							}//if end
+							//우선순위큐에 집어넣어!
+							priQue.offer(new Node(thisY,thisX));
 							reFlag=true;
+							
 						}//if end
 						visit[thisY][thisX]=true;
 						queue.offer(new Node(thisY,thisX));
@@ -120,16 +119,34 @@ public class LittleShark {
 					}//if end
 				}//for end 
 			}//for end 
-
 			
+			if(reFlag) {
+				//우선순위 큐 중에 제일좋은걸로 이동하고 아래걸 연산하믄댐
+
+				Node objNode = priQue.poll();
+				priQue.clear();
+				int objX=objNode.x;
+				int objY=objNode.y;
+				
+				queue.clear();
+				visit = new boolean[N][N];
+				answer=result;
+				babyStomach++;
+				status[map[objY][objX]]--;
+				map[objY][objX]=0;
+				check[objY][objX]=checkIndx++;
+				if(babyStomach==babyShark) {
+					babyShark++;
+					babyStomach=0;
+				}//if end
+
+				visit[objY][objX]=true;
+				queue.offer(new Node(objY,objX));
+				continue;
+			}//if end
 		}//while end 
 
-		
-		
-		if(ansFlag)
-			System.out.println(result);
-		else
-			System.out.println(0);
+		System.out.println(answer);
 		
 		br.close();		
 	}//main() end
