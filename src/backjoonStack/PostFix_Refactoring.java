@@ -18,10 +18,8 @@ public class PostFix_Refactoring {
 			char thisChar = s.charAt(i);
 			
 			if(thisChar>='A'&&thisChar<='Z') {
-				
 				System.out.print(thisChar);
 			}else if(thisChar=='*'||thisChar=='/') {
-				
 				if(!stack.isEmpty()) {
 					if(stack.peek()=='*'||stack.peek()=='/') {
 						System.out.print(stack.pop());
@@ -42,7 +40,6 @@ public class PostFix_Refactoring {
 			}else if(thisChar=='('){
 				stack.push(thisChar);
 			}//if end
-			
 		}//for end
 		
 		while(!stack.isEmpty()) {
