@@ -52,7 +52,7 @@ public class RobotCleaner {
 		}//leftCheck() end
 		
 		void turnLeft() {
-			this.d = (this.d+1)%4;
+			this.d = (this.d+3)%4;
 		}//turnLeft() end
 		
 		void go() {
