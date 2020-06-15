@@ -131,7 +131,6 @@ public class RobotCleaner {
 		robot.clean(); //청소 븨잉
 		
 		while(true) {
-			 
 			if(check==4) {
 				if(robot.backCheck()) { //뒤 갈수있겠다
 					robot.back();
@@ -161,7 +160,6 @@ public class RobotCleaner {
 				check++;
 				continue;
 			}//if~else end
-			
 		}//while end
 		
 		System.out.println(result);
