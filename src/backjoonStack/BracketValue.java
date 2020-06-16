@@ -12,17 +12,13 @@ public class BracketValue {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String s = br.readLine();
-		Stack<Character> stack = new Stack<Character>();
 		
-		if(s.length()==0||s.length()>30) {
-			System.out.println(0);
-			return ;
-		}
+		Stack<Character> stack = new Stack<Character>();
 		
 		stack.push(s.charAt(0));
 		char beforeC = s.charAt(0);
-		int level = 1;
-		int[] levelArr = new int[50];
+		int level = 0;
+		int[] levelArr = new int[30];
 				
 		for(int i=1;i<s.length();i++) {
 			char c = s.charAt(i);
@@ -66,10 +62,10 @@ public class BracketValue {
 		}//for end
 		
 		
-		if(stack.isEmpty()) 
-			System.out.println(levelArr[1]);
+		if(stack.isEmpty())  
+			System.out.println(levelArr[0]);
 		else
-			System.out.println(0);
+			System.out.println("0");
 		
 		br.close();
 	}//main() end
