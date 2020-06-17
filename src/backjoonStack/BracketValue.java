@@ -46,8 +46,7 @@ public class BracketValue {
 					levelArr[level+1]=0;
 				}
 			}//if end 소괄호 닫을때
-			
-			if(c==']' && checkC=='[') {
+			else if(c==']' && checkC=='[') {
 				stack.pop();
 				if(beforeC=='[')
 					levelArr[level]+=3;
@@ -56,6 +55,9 @@ public class BracketValue {
 					levelArr[level+1]=0;
 				}
 			}//if end 대괄호 닫을때
+			else {
+				break;
+			}
 			
 			level--;
 			beforeC=c;
