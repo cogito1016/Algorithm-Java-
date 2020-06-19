@@ -10,7 +10,7 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class LaboratoryVirus {
+public class LaboratoryVirus_Submit {
 
 	static class Node{
 		int x,y;
@@ -53,13 +53,10 @@ public class LaboratoryVirus {
 		originZeroArea-=3;
 		
 		int[][] copyMap = new int[N][M];
-		for(int i = 0; i < map.length; i++) {
-	        System.arraycopy(map[i], 0, copyMap[i], 0, map[i].length);
-	    }//for end
 		int brickNum = 1;
 		Stack<Integer> stack = new Stack<Integer>();
 		stack.add(-1);
-		Node[] nodeList = new Node[3];
+		
 		while(!stack.isEmpty()) {
 			
 			int standard = stack.pop();
@@ -69,12 +66,14 @@ public class LaboratoryVirus {
 				stack.add(a);
 				brickNum++;
 				if(brickNum==3) {
-					for(int b=0;b<3;b++) {
-						nodeList[b] = possible.get(stack.get(b));
-					}//for end
 
+					copyMap = new int[N][M];
+					for(int i = 0; i < map.length; i++) {
+				        System.arraycopy(map[i], 0, copyMap[i], 0, map[i].length);
+				    }//for end
+					
 					for(int b=0;b<3;b++) {
-						copyMap[nodeList[b].y][nodeList[b].x]=1;
+						copyMap[possible.get(stack.get(b)).y][possible.get(stack.get(b)).x]=1;
 					}//for end
 
 					visit = new boolean[N][M];
@@ -112,10 +111,6 @@ public class LaboratoryVirus {
 					}//while end
 					if(resultNum>largestArea)
 						largestArea=resultNum;
-					
-					for(int b=0;b<3;b++) {
-						copyMap[nodeList[b].y][nodeList[b].x]=0;
-					}//for end
 					break;
 				}//if end
 			}//for end			
