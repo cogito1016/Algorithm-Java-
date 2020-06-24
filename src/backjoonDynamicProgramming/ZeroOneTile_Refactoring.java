@@ -4,36 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ZeroOneTile {
+public class ZeroOneTile_Refactoring {
 
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-
-		if(N==1||N==2){
-			System.out.println(N);
-			return;
-		}
 		
-		int[] dp = new int[100001];
-		dp[0]=1;
-		dp[1]=2;
-		
+		int a=1,b=1,c=0;
 
-		N-=2;
-		int idx = 2;
-		while(N-- >0) {
-			if(idx==100001) {
-				dp[0]=dp[99999];
-				dp[1]=dp[100000];
-				idx=2;
-			}
-			dp[idx] = (dp[idx-2]+dp[idx-1])%15746;
-			idx++;
-		}
+		for(int i=1;i<N;i++) {
+			c = (a+b)%15746;
+			a = b;
+			b = c;
+		}//for end
 		 
-		System.out.println(dp[idx-1]);
+		System.out.println(b);
 		
 		br.close();
 	}//main() end
