@@ -26,53 +26,31 @@ public class CoinTwo {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken());
+		
 		int[] coin = new int[n];
+		int[] dp = new int[k+1];
 		
 		for(int i=0;i<n;i++) {
 			coin[i] = Integer.parseInt(br.readLine());
 		}//for end
 		
-		Stack<Node> stack = new Stack<Node>();
-		stack.add(new Node(k,0));
 		
-		List<Integer> goal = new ArrayList<Integer>();
 		
-		while(!stack.isEmpty()) {
-			
-			Node thisNode = stack.pop();
-			int thisNumber = thisNode.number;
-			int thisCount = thisNode.count;
-			
-			if(thisNumber==0)
-				continue;
-			
-			for(int i=0;i<n;i++) {
-				if(thisNumber<coin[i])
+		for(int i=0;i<n;i++) {
+			for(int j=k;j>0;j--) {
+				int top = j/coin[i];
+				int bottom = j%coin[i];
+				
+				if(dp[j]==0) {
+					dp[j]=top+dp[bottom];
 					continue;
+				}//if end
+				dp[j]=Math.min(top+dp[bottom],dp[j]);
 				
-				int top = thisNumber/coin[i];
-				int bottom = thisNumber%coin[i];
-				
-				if(bottom==0)
-					goal.add(thisCount+top);
-				else {
-					stack.add(new Node(bottom,thisCount+top));
-				}//if~else end
-			}//for end
-		}//while end
+			}//for end	
+		}//for end
 		
-		if(goal.isEmpty())
-			System.out.println(-1);
-		else {
-			Collections.sort(goal);
-			System.out.println(goal.get(0));
-		}
-			
-		
-		
-		
-		
-		
+		System.out.println(dp[k]);
 		
 		br.close();
 	}//main() end

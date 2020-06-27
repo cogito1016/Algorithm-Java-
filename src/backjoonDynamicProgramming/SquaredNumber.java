@@ -30,13 +30,18 @@ public class SquaredNumber {
 				if(bottom==0)
 					dp[j]=top;
 				else
-					dp[j]=minList[pow]*top+minList[bottom];
+					dp[j]=minList[pow]*top +minList[bottom];
 				
 				if(dp[j]<min)
 					min=dp[j];
 			}//for end
 			minList[i]=min;
 		}//for end
+		
+		
+		for(int i=1;i<=N;i++) {
+			System.out.println(i+"= "+minList[i]);
+		}
 		
 		System.out.println(minList[N]);
 		
