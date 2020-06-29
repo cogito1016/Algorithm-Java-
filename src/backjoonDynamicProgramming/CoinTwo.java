@@ -10,15 +10,6 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class CoinTwo {
-	
-	static class Node{
-		int count;
-		int number;
-		Node(int number, int count){
-			this.count=count;
-			this.number=number;
-		}//cons end
-	}//class end
 
 	public static void main(String[] args) throws IOException {
 		
@@ -41,16 +32,37 @@ public class CoinTwo {
 				int top = j/coin[i];
 				int bottom = j%coin[i];
 				
-				if(dp[j]==0) {
-					dp[j]=top+dp[bottom];
-					continue;
-				}//if end
-				dp[j]=Math.min(top+dp[bottom],dp[j]);
+//				if(dp[j]==0 && bottom==0) {
+//					dp[j]=top;
+//					continue;}//if end
+//				
+				for(int a=top;a>0;a--) {
+					int tempTop = a * coin[i];
+					int tempBottom = j-tempTop;
+					
+					if(dp[tempBottom]==0 && tempBottom!=0)
+						continue; //if end
+					
+					if(dp[j]==0) {
+						dp[j]=a+dp[tempBottom];
+						continue;}//if end
+					
+					dp[j]=Math.min(a+dp[tempBottom],dp[j]);
+				}
+
+//				if(dp[j]==0) {
+//					dp[j]=top+dp[bottom];
+//					continue;
+//				}//if end
+//				dp[j]=Math.min(top+dp[bottom],dp[j]);
 				
 			}//for end	
 		}//for end
 		
-		System.out.println(dp[k]);
+		if(dp[k]==0)
+			System.out.println(-1);
+		else
+			System.out.println(dp[k]);
 		
 		br.close();
 	}//main() end
