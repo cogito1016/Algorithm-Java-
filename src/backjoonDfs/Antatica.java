@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Antatica {
@@ -39,7 +40,14 @@ public class Antatica {
 			System.out.println(0);
 			return ;
 		}//if end
+		 
+		if(K>=set.size()) {
+			System.out.println(N);
+		}//if end
+		
 		K-=5;//이제 K는 a,n,t,i,c를 제외하고 가르칠 수 있는 스펠링 수
+		//그리고 set은 가르칠수 있는 스펠링의 종류
+		
 		
 		
 		
