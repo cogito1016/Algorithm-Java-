@@ -21,11 +21,14 @@ public class Teaching_Refactoring {
 		
 		//가르칠 스펠링 후보이다.
 		//중복이필요없으므로 Set이 적당할것같다.
-		Set<Character> set = new HashSet<Character>();
+		Set<Character> targetSpelingSet = new HashSet<Character>();
 		Map<String,Integer> targetWord = new ConcurrentHashMap<String, Integer>(); 
 		
 
 		Set<Character> neededCheckSpeling = new HashSet<Character>();
+		
+		//anta hello tica
+		
 		//a,n,t,i,c는 공통이므로 제외한다.
 		for(int i=0;i<N;i++) {
 			String s = br.readLine();
@@ -37,7 +40,7 @@ public class Teaching_Refactoring {
 				}//if end
 
 				neededCheckSpeling.add(c);
-				set.add(c);
+				targetSpelingSet.add(c);
 			}//for end
 
 			StringBuilder sb = new StringBuilder();
@@ -56,7 +59,9 @@ public class Teaching_Refactoring {
 			neededCheckSpeling.clear();
 		}//for end
 		
-		//antatica 는 공통
+		//helo
+		
+		//a,n,t,a,t,i,c,a 는 공통
 		//따라서 antic(5개)은 무조건 가르쳐야할 스펠링이다.
 		//K<5면 fail
 		if(K<5) {
@@ -67,52 +72,50 @@ public class Teaching_Refactoring {
 		K-=5;//이제 K는 a,n,t,i,c를 제외하고 가르칠 수 있는 스펠링 수
 		//그리고 set은 가르칠수 있는 스펠링의 종류
 		
-		if(K>=set.size()) {
+		if(K>=targetSpelingSet.size()) {
 			System.out.println(N);
 			return ;
 		}//if end
 		
 		
-		Character[] targetSpeling = new Character[set.size()];
-		Iterator<Character> iterator = set.iterator();
+		Character[] targetSpelingArr = new Character[targetSpelingSet.size()];
+		Iterator<Character> iterator = targetSpelingSet.iterator();
 		int targetIdx=0;
 		while(iterator.hasNext()) {
-			targetSpeling[targetIdx++] = iterator.next();
+			targetSpelingArr[targetIdx++] = iterator.next();
 		}//while end
-		
 		
 		Stack<Integer> stack = new Stack<Integer>();
 		stack.add(-1);
 		int count = 1 ;
 		int max = 0 ;
 
-		Set<String> keySet = targetWord.keySet();
+		Set<String> targetWordKeySet = targetWord.keySet();
 		//조합을 사용하여 판단
 		while(!stack.isEmpty()) {
 			
 			int thisNum = stack.pop();
 			count--;
 			
-			for(int i=thisNum+1;i<targetSpeling.length;i++) {
+			for(int i=thisNum+1;i<targetSpelingArr.length;i++) {
 				stack.add(i);
 				count++;
 				if(count==K) {
 					int possibleWord = 0;
 					
-				
-					for(String s : keySet) {
-						
+					for(String s : targetWordKeySet) {
 						boolean possibleFlag = true;
 						
 						for(int b=0;b<s.length();b++) {
 							char c = s.charAt(b);
+							
 							for(int a=0;a<K;a++) {
-								if(c==targetSpeling[stack.get(a)]) {
+								if(c==targetSpelingArr[stack.get(a)]) {
 									possibleFlag=true;
 									break;
-								}//if end
+								}
 								possibleFlag=false;
-							}//for end
+							}
 							
 							if(!possibleFlag)
 								break;
