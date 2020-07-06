@@ -85,6 +85,8 @@ public class Teaching_Refactoring {
 			targetSpelingArr[targetIdx++] = iterator.next();
 		}//while end
 		
+		int[] possibleSpelingList = new int[123];
+		
 		Stack<Integer> stack = new Stack<Integer>();
 		stack.add(-1);
 		int count = 1 ;
@@ -96,10 +98,13 @@ public class Teaching_Refactoring {
 			
 			int thisNum = stack.pop();
 			count--;
+			if(thisNum!=-1)
+				possibleSpelingList[targetSpelingArr[thisNum]]=0;
 			
 			for(int i=thisNum+1;i<targetSpelingArr.length;i++) {
 				stack.add(i);
 				count++;
+				possibleSpelingList[targetSpelingArr[i]]=1;
 				if(count==K) {
 					int possibleWord = 0;
 					
@@ -109,13 +114,11 @@ public class Teaching_Refactoring {
 						for(int b=0;b<s.length();b++) {
 							char c = s.charAt(b);
 							
-							for(int a=0;a<K;a++) {
-								if(c==targetSpelingArr[stack.get(a)]) {
-									possibleFlag=true;
-									break;
-								}
+							if(possibleSpelingList[c]==1)
+								possibleFlag=true;
+							else
 								possibleFlag=false;
-							}
+							
 							
 							if(!possibleFlag)
 								break;
