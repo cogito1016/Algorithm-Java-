@@ -23,11 +23,7 @@ public class Teaching_Refactoring {
 		//중복이필요없으므로 Set이 적당할것같다.
 		Set<Character> targetSpelingSet = new HashSet<Character>();
 		Map<String,Integer> targetWord = new ConcurrentHashMap<String, Integer>(); 
-		
-
 		Set<Character> neededCheckSpeling = new HashSet<Character>();
-		
-		//anta hello tica
 		
 		//a,n,t,i,c는 공통이므로 제외한다.
 		for(int i=0;i<N;i++) {
@@ -59,8 +55,6 @@ public class Teaching_Refactoring {
 			neededCheckSpeling.clear();
 		}//for end
 		
-		//helo
-		
 		//a,n,t,a,t,i,c,a 는 공통
 		//따라서 antic(5개)은 무조건 가르쳐야할 스펠링이다.
 		//K<5면 fail
@@ -76,7 +70,6 @@ public class Teaching_Refactoring {
 			System.out.println(N);
 			return ;
 		}//if end
-		
 		
 		Character[] targetSpelingArr = new Character[targetSpelingSet.size()];
 		Iterator<Character> iterator = targetSpelingSet.iterator();
