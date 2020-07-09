@@ -44,7 +44,7 @@ public class MovingPipe {
 				map[i][j]=Integer.parseInt(st.nextToken());
 			}//for end
 		}//for end
-		
+
 		Queue<Pipe> queue = new LinkedList<Pipe>();
 		Node startNode = new Node(0,0);
 		int possibleCount = 0;
