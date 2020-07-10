@@ -32,14 +32,11 @@ public class Retirement {
 		int attainableValue = 0;
 		int resultValue = 0;
 		while(!stack.isEmpty()) {
-			if(stack.size()==4 && stack.get(1)==5) {
-				System.out.println("hi fuck");
-			}
+			
 			int thisNum = stack.pop();
 
-			
 			if(thisNum!=-1) {
-				neededDays = T[thisNum];
+				neededDays = T[thisNum]-1;
 				attainableValue = P[thisNum];
 			}//if end
 			
@@ -47,20 +44,18 @@ public class Retirement {
 			
 			for(int i=thisNum+1;i<N;i++) {
 				neededDays--;
-				stack.add(i);
-				if(neededDays!=0)
+				if(neededDays>0)
 					continue;
 				if(i+T[i]>=N+1)
 					continue;
-				
+
+				stack.add(i);
 				neededDays=T[i];
 				resultValue+=P[i];
 				
 				if(max<resultValue)
 					max=resultValue;
 			}//for end
-			
-			System.out.println(stack);
 		}//while end
 		
 		System.out.println(max);
