@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class Retirement {
+public class Retirement_Refactoring {
 
 	public static void main(String[] args) throws Exception{
 		
@@ -36,7 +36,7 @@ public class Retirement {
 			int thisNum = stack.pop();
 
 			if(thisNum!=-1) {
-				neededDays = T[thisNum]-1;
+				neededDays = 0;
 				attainableValue = P[thisNum];
 			}//if end
 			
@@ -56,7 +56,7 @@ public class Retirement {
 				if(max<resultValue)
 					max=resultValue;
 			}//for end
-			System.out.println(stack);
+//			System.out.println(stack);
 		}//while end
 		
 		System.out.println(max);
