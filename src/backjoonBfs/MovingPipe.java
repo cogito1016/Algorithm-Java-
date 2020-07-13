@@ -93,17 +93,16 @@ public class MovingPipe {
 							drawMap[thisY][thisX]=drawMap[end.y][end.x]+1;
 						}//if~else end
 					}//if end
-					
 				}//for end
 			}//for end
 
-			for(int i=0;i<N;i++) {
-				for(int j=0;j<N;j++) {
-					System.out.print(drawMap[i][j]+"  ");
-				}//for end
-				System.out.println();
-			}//for end
-			System.out.println();
+//			for(int i=0;i<N;i++) {
+//				for(int j=0;j<N;j++) {
+//					System.out.print(drawMap[i][j]+"  ");
+//				}//for end
+//				System.out.println();
+//			}//for end
+//			System.out.println();
 		}//while end
 		
 		System.out.println(possibleCount);
