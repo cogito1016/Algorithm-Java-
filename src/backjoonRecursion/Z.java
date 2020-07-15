@@ -6,7 +6,43 @@ import java.util.StringTokenizer;
 
 public class Z {
 	
-	public static void Z(int sz, int x, int y) {
+	static int result = 0;
+	static int r;
+	static int c;
+	public static void solve(int size, int x, int y) {
+		
+		if(size==1)
+			return;
+		
+		if(size==2) {
+			if(x==c&&y==r) { 
+				System.out.println(result);
+				return;
+			}
+			result++;
+			if(x+1==c&&y==r) {
+				System.out.println(result);
+				return;
+			}
+			result++;
+			if(x==c&&y+1==r) {
+				System.out.println(result);
+				return;
+			}
+			result++;
+			if(x+1==c&&y+1==r) {
+				System.out.println(result);
+				return;
+			}
+			result++;
+		}//if end
+		
+		size = size/2;
+		solve(size,x,y);
+		solve(size,size+x,y);
+		solve(size,x,size+y);
+		solve(size,size+x,size+y);
+		
 		
 	}
 
@@ -16,11 +52,11 @@ public class Z {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		int N = Integer.parseInt(st.nextToken());
-		int r = Integer.parseInt(st.nextToken());
-		int c = Integer.parseInt(st.nextToken());
+		r = Integer.parseInt(st.nextToken());
+		c = Integer.parseInt(st.nextToken());
 		
 		
-		System.out.println(Z((int)Math.pow(N, 2),r,c));
+		solve((int)Math.pow(2, N),0,0);
 		
 		
 		br.close();
