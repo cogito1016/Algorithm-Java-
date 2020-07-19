@@ -50,7 +50,7 @@ public class MovingPipe {
 		int possibleCount = 0;
 		if(map[0][1]!=1)
 			queue.offer(new Pipe(startNode,new Node(0,1),PipeState.LandScape));
-		
+
 		while(!queue.isEmpty()) {
 			int queueSize = queue.size();
 			for(int i=0;i<queueSize;i++){
@@ -104,7 +104,6 @@ public class MovingPipe {
 //			}//for end
 //			System.out.println();
 		}//while end
-		
 		System.out.println(possibleCount);
 		br.close();
 	}//main() end
