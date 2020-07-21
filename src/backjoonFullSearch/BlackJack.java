@@ -41,8 +41,8 @@ public class BlackJack {
 				tempResult += cards[i];
 				count ++ ;
 				stack.add(i);
-				
 				if(count==3) {
+//					System.out.println(stack);
 					if(tempResult>max && tempResult<=M)
 						max=tempResult;
 					break;
