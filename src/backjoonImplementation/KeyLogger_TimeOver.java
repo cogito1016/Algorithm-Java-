@@ -2,13 +2,10 @@ package backjoonImplementation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Stack;
 
-public class KeyLogger {
+public class KeyLogger_TimeOver {
 
 	public static void main(String[] args) throws Exception{
 		
