@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test4 {
 
@@ -15,5 +17,10 @@ public class Test4 {
 		System.out.println(""==null);
 		System.out.println("ab"=="ab");
 		System.out.println(a==b);
+		
+		List<Integer> hi = new ArrayList<Integer>();
+		hi.add(0);
+		Integer ha = null;
+		System.err.println(hi.get(0).getClass());
 	}//main() end
 }

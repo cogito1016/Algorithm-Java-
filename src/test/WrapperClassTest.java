@@ -26,5 +26,12 @@ public class WrapperClassTest {
 		Integer i2 = 128;
 		assertTrue(i1.equals(i2));
 	}
+	
+	@Test
+	public void Integer_비교_128이상_3() {
+		Integer i1 = 128;
+		Integer i2 = 128;
+		assertTrue(i1.intValue()==i2.intValue());
+	}
 
 }
