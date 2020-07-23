@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +22,6 @@ public class FriendsNetwork {
 			
 			Map<String, Integer> relationMap = new ConcurrentHashMap<String, Integer>(); //Key=이름 Value=관계도
 			int[] networkValueArray = new int[N]; //관계도=Index 관계수=Value
-			
 			
 			for(int i=0;i<N;i++) {
 				st = new StringTokenizer(br.readLine());
@@ -70,7 +67,6 @@ public class FriendsNetwork {
 			}//for end
 			bw.flush();
 		}//while end
-		
 		
 		bw.close();
 		br.close();
