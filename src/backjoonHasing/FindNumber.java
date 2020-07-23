@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -28,10 +27,10 @@ public class FindNumber {
 		int M = Integer.parseInt(br.readLine());
 		st= new StringTokenizer(br.readLine());
 		for(int i=0;i<M;i++) {
-			if(set.add(Integer.parseInt(st.nextToken())))
-				bw.write('0');
-			else
+			if(set.contains(Integer.parseInt(st.nextToken())))
 				bw.write('1');
+			else
+				bw.write('0');
 			bw.newLine();
 		}//for end
 		
