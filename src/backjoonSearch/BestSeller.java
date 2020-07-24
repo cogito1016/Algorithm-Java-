@@ -2,15 +2,11 @@ package backjoonSearch;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BestSeller {
-
+	
 	public static void main(String[] args) throws Exception{
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,36 +14,37 @@ public class BestSeller {
 		Map<String, Integer> map = new ConcurrentHashMap<String, Integer>();
 		int max =  1;
 		
+		String title=null;
 		
 		for(int i=0;i<N;i++) {
-			
+			int value = 0;
 			String s = br.readLine();
 			if(!map.containsKey(s)) {
 				map.put(s,1);
-				continue;
-			}//if end
+				value = 1;
+			}else {
+				value = map.get(s)+1;
+				map.put(s,value);
+			}//if~else end
 			
-			int value = map.get(s)+1;
-			map.put(s,value);
+			if(value==max) {
+				if(title==null)
+					title=s;
+				else {
+					int result = title.compareTo(s);
+					if(result>0)
+						title=s;
+				}//if~else end 
+			}//if end
 			
 			if(value>max) {
 				max=value;
-			}//if end
+				title = s;
+			}
+			
 		}//for end
 		
-		List<String> titles = new ArrayList<String>();
-		
-		Iterator iterator  = map.keySet().iterator();
-		while(iterator.hasNext()) {
-			String title = iterator.next().toString();
-			if(map.get(title)==max) {
-				titles.add(title);
-			}//if end
-		}//while end
-		
-		Collections.sort(titles);
-		
-		System.out.println(titles.get(0));
+		System.out.println(title);
 		
 		br.close();
 	}//main() end
