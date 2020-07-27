@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class WeightCut {
+public class WeightCut_DFS_FAIL {
 	public static int max;
 	
 	public static void trace(int N,boolean[][] visited, int[][] map,int start,int goal,int value) {
