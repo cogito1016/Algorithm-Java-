@@ -22,22 +22,30 @@ public class Retirement_Refactoring2 {
 			P[i] = Integer.parseInt(st.nextToken());
 		}//for end
 		
-		
 		if(N+T[N]-1 > N)
 			dp[N]=0;
 		else
 			dp[N] = P[N];
 		
+		int result=dp[N];
 		for(int i=N-1;i>=1;i--) {
 			if( (i+T[i]-1)>N ) 
 				continue;
-			if(i+T[i]>N)
-				dp[i]= Math.max(dp[i+1],P[i]);
-			else
-				dp[i]= Math.max(dp[i+T[i]]+P[i],dp[i+1]);
+			
+			int max = 0 ;
+			if(i+T[i]<=N) {
+				for(int j=i+T[i];j<=N;j++) {
+					if(max<dp[j])
+						max=dp[j];
+				}//for end
+			}
+			dp[i] = P[i]+max;
+			if(dp[i]>result)
+				result=dp[i];
 		}//for end 
 		
-		System.out.println(dp[1]);
+		System.out.println(result);
+		
 		
 		br.close();
 	}//main() end
