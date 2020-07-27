@@ -1,19 +1,32 @@
-package backjoonBinarySearch;
+package backjoonDfs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class WeightCut {
+	public static int max;
 	
-	static class Node{
-		int x,y,possibleWeight;
-		Node(int y,int x, int possibleWeight){
-			this.x=x;
-			this.y=y;
-			this.possibleWeight=possibleWeight;
-		}//cons end
-	}//Node class end
+	public static void trace(int N,boolean[][] visited, int[][] map,int start,int goal,int value) {
+		
+		if(start==goal) {
+			if(max<value)
+				max=value;
+			return;
+		}//if end
+		
+		for(int i=1;i<=N;i++) {
+			if(map[start][i]!=0 && !visited[start][i]) {
+				visited[start][i]=true;
+				visited[i][start]=true;
+				int newValue = map[start][i]<value?map[start][i]:value;
+				trace(N,visited,map,i,goal,newValue);
+				visited[start][i]=false;
+				visited[i][start]=false;
+			}//if end
+		}//for end
+		
+	}
 
 	public static void main(String[] args) throws Exception{
 		
@@ -31,17 +44,19 @@ public class WeightCut {
 			int second = Integer.parseInt(st.nextToken());
 			int weight = Integer.parseInt(st.nextToken());
 			
-			islands[first][second]=weight;
-			islands[second][first]=weight;
+			if(islands[first][second]<weight) {
+				islands[first][second]=weight;
+				islands[second][first]=weight;
+			}//if end
 		}//for end 
 		
 		st = new StringTokenizer(br.readLine());
 		int goalY = Integer.parseInt(st.nextToken());
 		int goalX = Integer.parseInt(st.nextToken());
-		int max = 0;
+		
+		trace(N,visited,islands,goalY,goalX,1000000000);
 		
 		System.out.println(max);
-		
 		br.close();
 	}//main() end
 }
