@@ -12,6 +12,7 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
+//FAIL
 public class WeightCut_BFS_BinarySearch {
 
 	public static void main(String[] args) throws Exception{
@@ -59,7 +60,7 @@ public class WeightCut_BFS_BinarySearch {
 		
 		int mid;
 		
-		Queue<Integer> queue = new LinkedList<Integer>();
+		Queue<Integer> queue;
 		boolean[] visit = new boolean[N+1];
 		boolean possible = false;
 		Iterator<Integer> iterator;
