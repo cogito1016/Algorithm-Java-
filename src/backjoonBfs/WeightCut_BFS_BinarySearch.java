@@ -2,10 +2,15 @@ package backjoonBfs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class WeightCut_BFS_BinarySearch {
 
@@ -16,8 +21,13 @@ public class WeightCut_BFS_BinarySearch {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		
-		int[][] islands = new int[N+1][N+1];
+//		int[][] islands = new int[N+1][N+1];
+		List<ConcurrentHashMap<Integer, Integer>> islands = new ArrayList<ConcurrentHashMap<Integer,Integer>>();
 		int min=1000000000,max=0;
+		
+		for(int i=0;i<=N;i++) {
+			islands.add(new ConcurrentHashMap<Integer, Integer>());
+		}//for end 
 		
 		for(int i=0;i<M;i++) {
 			st = new StringTokenizer(br.readLine());
@@ -25,14 +35,22 @@ public class WeightCut_BFS_BinarySearch {
 			int second = Integer.parseInt(st.nextToken());
 			int weight = Integer.parseInt(st.nextToken());
 			
-			if(islands[first][second]<weight) {
-				if(weight<min)
-					min=weight;
-				if(weight>max)
-					max=weight;
-				islands[first][second]=weight;
-				islands[second][first]=weight;
-			}//if end
+			if(islands.get(first).containsKey(second) || islands.get(second).containsKey(first)) {
+				if(islands.get(first).get(second)>weight) {
+					islands.get(first).put(second,weight);
+					islands.get(second).put(first, weight);
+				}		
+			}else {
+				islands.get(first).put(second,weight);
+				islands.get(second).put(first,weight);
+			}//if~else end
+			
+			if(weight<min)
+				min=weight;
+			
+			if(weight>max)
+				max=weight;
+			
 		}//for end 
 		
 		st = new StringTokenizer(br.readLine());
@@ -44,37 +62,46 @@ public class WeightCut_BFS_BinarySearch {
 		Queue<Integer> queue = new LinkedList<Integer>();
 		boolean[] visit = new boolean[N+1];
 		boolean possible = false;
+		Iterator<Integer> iterator;
 		int result = 0;
 		while(min<=max) {
 			mid=(min+max)/2;
-			queue.clear();
+			queue = new LinkedList<Integer>();
 			Arrays.fill(visit,false);
 			visit[goalY]=true;
 			possible=false;
 			
-			for(int i=1;i<=N;i++) {
-				if(islands[goalY][i]!=0 && islands[goalY][i]>=mid) {	
-					queue.offer(i);
-					visit[i]=true;
-				}//if end
-			}//for end 
+			iterator = islands.get(goalY).keySet().iterator();
+			
+			while(iterator.hasNext()) {
+				int thisIdx = iterator.next();
+				if(islands.get(goalY).get(thisIdx)>=min) {
+					if(thisIdx==goalX) {
+						possible=true;
+						break;
+					}//if end 
+					queue.offer(thisIdx);
+//					visit[thisIdx]=true;
+				}
+			}//while end 
 			
 			while(!queue.isEmpty()) {
-				int thisIsland = queue.poll();
-				if(thisIsland==goalX) {
-					possible=true;
+				if(possible)
 					break;
-				}
-				for(int i=1;i<=N;i++) {
-					if(visit[i])
+				int thisIsland = queue.poll();
+				iterator = islands.get(thisIsland).keySet().iterator();
+				while(iterator.hasNext()) {
+					int thisIdx = iterator.next();
+					if(visit[thisIdx])
 						continue;
-					if(islands[thisIsland][i]!=0 && islands[thisIsland][i]>=mid) {
-						if(i==goalX) {
+					
+					if(islands.get(thisIsland).get(thisIdx)>=mid) {
+						if(thisIdx==goalX) {
 							possible=true;
 							break;
-						}
-						queue.offer(i);
-						visit[i]=true;
+						}//if end
+						queue.offer(thisIdx);
+						visit[thisIdx]=true;
 					}//if end
 				}//for end 
 				if(possible)
