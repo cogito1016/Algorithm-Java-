@@ -2,14 +2,16 @@ package backjoonTree;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-//FAIL
 public class TreeSearch {
 
 	static class Tree{
 		Node head;
+		List<Node> list = new ArrayList<Node>();
 		
 		public void setHead(Node head) {
 			this.head=head;
@@ -35,32 +37,46 @@ public class TreeSearch {
 					stack.add(node.right);
 				}
 			}//while end 
-			
+
 			if(result==null) {
-				result = new Node();
-				result.value=value;
-			}
+				for(Node node : list) {
+					if(node.value.equals(value)) {
+						result=node;
+						break;
+					}//if end
+				}//for end
+				if(result==null) {
+					result=new Node();
+					result.value=value;
+					list.add(result);	
+				}//if end
+			}//if end
 			return result;
 		}//findNode() end
 		
-		public void preSearch() {
-			Stack<Node> stack = new Stack<Node>();
-			stack.add(head);
-			
-			while(!stack.isEmpty()) {
-				
-				Node node = stack.pop();
-				System.out.print(node.value);
-				
-				if(node.right!=null)
-					stack.add(node.right);
-				if(node.left!=null)
-					stack.add(node.left);
-			}//while end 
+		public void preSearch(Node node) {
+			System.out.print(node.value);
+			if(node.left!=null)
+				preSearch(node.left);
+			if(node.right!=null)
+				preSearch(node.right);
 		}//preSearch() end
 		
-		public void midSearch() {
+		public void midSearch(Node node) {
+			if(node.left!=null)
+				midSearch(node.left);
+			System.out.print(node.value);
+			if(node.right!=null)
+				midSearch(node.right);
 		}//midSearch() end
+		
+		public void postSearch(Node node) {
+			if(node.left!=null)
+				postSearch(node.left);
+			if(node.right!=null)
+				postSearch(node.right);
+			System.out.print(node.value);
+		}//postSearch() end
 	}
 	
 	static class Node{
@@ -98,6 +114,8 @@ public class TreeSearch {
 		
 		tree.setHead(head);
 		
+		
+		
 		for(int i=1;i<N;i++) {
 			st = new StringTokenizer(br.readLine());
 			String value = st.nextToken();
@@ -118,8 +136,11 @@ public class TreeSearch {
 			}
 		}//for end
 		
-		tree.preSearch();
-		
+		tree.preSearch(head);
+		System.out.println();
+		tree.midSearch(head);
+		System.out.println();
+		tree.postSearch(head);
 		br.close();
 	}//main() end
 }
