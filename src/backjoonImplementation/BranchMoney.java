@@ -15,6 +15,11 @@ public class BranchMoney {
 		int B =Integer.parseInt(st.nextToken());
 		int C =Integer.parseInt(st.nextToken());
 		
+		if(B>=C) {
+			System.out.println(-1);
+			return ;
+		}//if end 
+		
 		int result = A/(C-B)+1;
 		
 		System.out.println(result);
