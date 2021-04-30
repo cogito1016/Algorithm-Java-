@@ -8,10 +8,6 @@ import java.io.OutputStreamWriter;
 
 public class BasicStack {
 
-    static boolean stackIsEmpty(int currentIdx){
-        return currentIdx-1 < 0 ? true : false;
-    }
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -32,7 +28,7 @@ public class BasicStack {
             }
 
             if(request.equals("pop")){
-                if(stackIsEmpty(currentIdx)){
+                if(currentIdx==0){
                     bw.write(-1+"\n");
                 }else{
                     currentIdx--;
@@ -49,7 +45,7 @@ public class BasicStack {
             }
 
             if(request.equals("top")){
-                if(stackIsEmpty(currentIdx)){
+                if(currentIdx==0){
                     bw.write(-1+"\n");
                 }else{
                     bw.write(stack[currentIdx-1]+"\n");
