@@ -5,8 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class LastCard {
     public static void main(String[] args) throws IOException {
@@ -15,18 +15,18 @@ public class LastCard {
 
         int n = Integer.parseInt(br.readLine());
 
-        Deque<Integer> deque = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();
 
         for(int i=1 ;i<=n;i++){
-            deque.addFirst(i);
+            queue.offer(i);
         }
 
-        while(deque.size()!=1){
-            deque.removeLast();
-            deque.addFirst(deque.removeLast());
+        while(queue.size()!=1){
+            queue.poll();
+            queue.offer(queue.poll());
         }
 
-        bw.write(deque.getFirst()+"\n");
+        bw.write(queue.peek()+"\n");
 
         bw.close();
         br.close();
