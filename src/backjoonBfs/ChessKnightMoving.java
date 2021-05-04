@@ -23,27 +23,37 @@ public class ChessKnightMoving {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int testCaseNum = Integer.parseInt(br.readLine());
-
+        Queue<Node> queue = new LinkedList<>();
         int[][] direction = {{-1,-2}, {-2,-1}, {-1,2}, {-2,1}, {1,-2}, {2,-1}, {2,1}, {1,2}};
 
+        int N;
+        boolean[][] visited ;
+        int startY,startX,goalY,goalX;
+        String[] kniteLoc,goalLoc;
+        int moveCnt;
+        boolean isDone;
+
         while(testCaseNum-->0){
-            Queue<Node> queue = new LinkedList<>();
-            int N = Integer.parseInt(br.readLine());
-            boolean[][] visited = new boolean[N][N];
+            while(!queue.isEmpty()){
+                queue.poll();
+            }
 
-            String[] kniteLoc = br.readLine().split(" ");
-            int startY = Integer.parseInt(kniteLoc[0]);
-            int startX = Integer.parseInt(kniteLoc[1]);
+            N = Integer.parseInt(br.readLine());
+            visited = new boolean[N][N];
 
-            String[] goalLoc = br.readLine().split(" ");
-            int goalY = Integer.parseInt(goalLoc[0]);
-            int goalX = Integer.parseInt(goalLoc[1]);
+            kniteLoc = br.readLine().split(" ");
+            startY = Integer.parseInt(kniteLoc[0]);
+            startX = Integer.parseInt(kniteLoc[1]);
+
+            goalLoc = br.readLine().split(" ");
+            goalY = Integer.parseInt(goalLoc[0]);
+            goalX = Integer.parseInt(goalLoc[1]);
 
             queue.offer(new Node(startY,startX));
             visited[startY][startX] = true;
 
-            int moveCnt = -1;
-            boolean isDone = false;
+            moveCnt = -1;
+            isDone = false;
 
             while(!queue.isEmpty()){
                 if(isDone){
