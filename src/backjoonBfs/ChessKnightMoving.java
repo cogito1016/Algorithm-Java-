@@ -42,41 +42,38 @@ public class ChessKnightMoving {
             queue.offer(new Node(startY,startX));
             visited[startY][startX] = true;
 
-            int moveCnt = 0;
-            int beforeLevelCnt = 0;
-            int afterLevelCnt = 0;
+            int moveCnt = -1;
+            boolean isDone = false;
 
             while(!queue.isEmpty()){
-                Node presentNode = queue.poll();
-
-                if(presentNode.y==goalY && presentNode.x==goalX){
+                if(isDone){
                     break;
                 }
 
-                if(beforeLevelCnt>0){
-                    beforeLevelCnt--;
-                }
+                int queueSize = queue.size();
+                moveCnt++;
+                for(int i=0;i<queueSize;i++){
+                    Node presentNode = queue.poll();
 
-                for(int i=0; i<8; i++){
-                    int y = presentNode.y + direction[i][0];
-                    int x = presentNode.x + direction[i][1];
-
-                    if(x>=N || y>=N || x<0 || y<0){
-                        continue;
-                    }
-                    if(visited[y][x]){
-                        continue;
+                    if(presentNode.y==goalY && presentNode.x==goalX){
+                        isDone=true;
+                        break;
                     }
 
-                    afterLevelCnt++;
-                    visited[y][x] = true;
-                    queue.offer(new Node(y,x));
-                }
+                    for(int j=0; j<8; j++){
+                        int y = presentNode.y + direction[j][0];
+                        int x = presentNode.x + direction[j][1];
 
-                if(beforeLevelCnt==0){
-                    moveCnt++;
-                    beforeLevelCnt=afterLevelCnt;
-                    afterLevelCnt=0;
+                        if(x>=N || y>=N || x<0 || y<0){
+                            continue;
+                        }
+                        if(visited[y][x]){
+                            continue;
+                        }
+
+                        visited[y][x] = true;
+                        queue.offer(new Node(y,x));
+                    }
                 }
             }
 
