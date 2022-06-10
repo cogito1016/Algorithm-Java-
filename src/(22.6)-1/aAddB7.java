@@ -24,7 +24,9 @@ public class aAddB7 {
             int a = Integer.parseInt(nums[0]);
             int b = Integer.parseInt(nums[1]);
             int result = a + b;
-            bw.write("Case #"+count+":"+" "+result);
+            bw.append("Case #"+count+":");
+            bw.append(" "+a+" + "+b);
+            bw.append(" = "+result);
             bw.newLine();
             count++;
         }
