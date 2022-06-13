@@ -30,14 +30,14 @@ public class ReversingWord {
             String[] sentences = br.readLine().split(" ");
 
             for(String word : sentences){ //단어의개수 50
-                int wordLength = word.length(); //단어의길이 20
+                int wordLength = word.length();
 
-                for(int i=0; i<wordLength; i++){
+                for(int i=0; i<wordLength; i++){//단어의길이 20
                     char c = word.charAt(i);
                     stack.push(c);
                 }//fo end
 
-                while(!stack.empty()){
+                while(!stack.empty()){//단어의길이 20
                     bw.write(stack.pop());
                 }//while end
                 bw.write(" ");
