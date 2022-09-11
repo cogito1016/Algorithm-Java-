@@ -27,3 +27,16 @@ public class ChessMaster {
         bw.close();
     }
 }
+
+/**
+ * 1.
+ * 1-1. chessRule을 Map으로 리팩토링
+ * 1-1-1. Key: 폰,킹,퀸 ...
+ * 1-1-2. Value: 필요개수
+ * 1-2. 사용자 입력을 Stream화
+ * 1-2-1. map을 사용하여 처리.. 하려면 사용자 입력 순서에도 Key값이 있어야하잖아?
+ * Failed
+ * 사용자의 입력값 중 처음이 '킹'임을 알아야 Map을 사용할 수 있다.
+ * 그럼 사용자 입력을 List<Map<String,Integer>>로 만든 후 Stream()처리를 해야하는 것일까?
+ * 그렇다면 정말 구려질 것.
+ */
